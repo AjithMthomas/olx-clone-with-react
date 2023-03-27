@@ -6,6 +6,7 @@ import React,{useEffect,useContext} from 'react';
 import { BrowserRouter as Router,Route } from 'react-router-dom';
 import Signup from './Pages/Signup'
 import Login from './Pages/Login'
+import Create from './Components/Create/Create';
 import {authContext,firebaseContext} from './store/Context'
 import './App.css';
 import Home from './Pages/Home';
@@ -30,7 +31,10 @@ useEffect(()=>{
             <Signup />  
             </Route>
             <Route path='/login'>
-            < Login/>  
+            <Login/>  
+            </Route>
+            <Route path='/create'>
+            <Create/>  
             </Route>
         </Router>
     </div>
