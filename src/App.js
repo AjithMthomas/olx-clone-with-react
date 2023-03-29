@@ -7,9 +7,11 @@ import { BrowserRouter as Router,Route } from 'react-router-dom';
 import Signup from './Pages/Signup'
 import Login from './Pages/Login'
 import Create from './Components/Create/Create';
+import View from './Pages/ViewPost'
 import {authContext,firebaseContext} from './store/Context'
 import './App.css';
 import Home from './Pages/Home';
+import Post  from './store/PostContext';
 
 
 
@@ -23,7 +25,8 @@ useEffect(()=>{
 })
   return (
     <div>
-     <Router>
+      <Post>
+          <Router>
             <Route  exact path='/'>
             <Home />  
             </Route>
@@ -36,7 +39,11 @@ useEffect(()=>{
             <Route path='/create'>
             <Create/>  
             </Route>
-        </Router>
+            <Route path='/view'>
+            <View/>  
+            </Route>
+         </Router>
+        </Post>
     </div>
   );
 }

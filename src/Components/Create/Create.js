@@ -1,20 +1,32 @@
 import React, { Fragment,useState,useContext } from 'react';
 import './Create.css';
 import Header from '../Header/Header';
+import { useHistory } from 'react-router-dom';
 import {firebaseContext,authContext} from '../../store/Context'
 
 const Create = () => {
   const{firebase} = useContext(firebaseContext)
   const {user} = useContext(authContext)
- const[name,setName] = useState('')
- const[category,setCategory] = useState ('')
- const[price,setPrice] = useState()
- const[image,setImage] = useState(null)
+  const history = useHistory()
+  const[name,setName] = useState('')
+  const[category,setCategory] = useState ('')
+  const[price,setPrice] = useState()
+  const[image,setImage] = useState(null)
+  const date = new Date()
 
  const handleSubmit=()=>{
       firebase.storage().ref(`/image/${image.name}`).put(image).then(({ref})=>{
         ref.getDownloadURL().then((url)=>{
           console.log(url)
+          firebase.firestore().collection('products').add({
+            name,
+            category,
+            price,
+            url,
+            userId:user.uid,
+            createdAt:date.toDateString()
+          })
+          history.push('/')
         })
       }
       )
@@ -67,7 +79,7 @@ const Create = () => {
             <input onChange={(e)=>{setImage(e.target.files[0])}}
             type="file" />
             <br />
-            <button  onClick={()=>handleSubmit()} className="uploadBtn">upload and Submit</button>
+            <button  onClick={()=>handleSubmit()} className="uploadBtn" type="button">upload and Submit</button>
           </form>
         </div>
       </card>
