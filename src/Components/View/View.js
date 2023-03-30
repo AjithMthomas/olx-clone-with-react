@@ -1,14 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PostContext } from '../../store/PostContext';
 import { firebaseContext } from '../../store/Context';
 import './View.css';
+
 function View() {
-  const [userDetails,setUserDetails] =useState()
+  const [userDetails,setUserDetails] = useState()
   const {postDetails} =useContext(PostContext)
   const {firebase} = useContext(firebaseContext)
+  console.log(userDetails)
+  console.log(postDetails)
   useEffect(()=>{
     const {userId} = postDetails
-    firebase.firestore().collectiom('users').where('id','==',userId).get().then((res)=>{
+    firebase.firestore().collection('users').where('id','==',userId).get().then((res)=>{
       res.forEach(doc=>{
         setUserDetails(doc.data())
       })

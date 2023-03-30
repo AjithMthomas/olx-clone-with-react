@@ -12,6 +12,9 @@ import {authContext,firebaseContext} from './store/Context'
 import './App.css';
 import Home from './Pages/Home';
 import Post  from './store/PostContext';
+import Search from './assets/Search';
+  
+
 
 
 
@@ -42,7 +45,12 @@ useEffect(()=>{
             <Route path='/view'>
             <View/>  
             </Route>
+            <Route path='/search'>
+            <Search/>
+            <Home/>
+            </Route>
          </Router>
+           
         </Post>
     </div>
   );

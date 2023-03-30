@@ -1,6 +1,6 @@
 import { createContext,useState } from "react";
 
-export const PostContext = createContext()
+export const PostContext = createContext(null)
 
 
 function Post({children}){
